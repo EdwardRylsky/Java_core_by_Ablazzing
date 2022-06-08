@@ -10,8 +10,6 @@
         //Hello world!
  */
 
-import java.util.Locale;
-
 public class Task1 {
 
     public static void main(String[] args) {
@@ -19,10 +17,13 @@ public class Task1 {
         String world = " WoRld!";
         char newLine = '\n';
 
+        String normalHi = hi.trim();
+        String normalWorld = world.toLowerCase();
+
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < 3; i++) {
-            stringBuilder.append(hi.trim());
-            stringBuilder.append(world.toLowerCase());
+            stringBuilder.append(normalHi);
+            stringBuilder.append(normalWorld);
             stringBuilder.append(newLine);
         }
 
