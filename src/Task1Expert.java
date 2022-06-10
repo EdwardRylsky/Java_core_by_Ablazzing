@@ -69,17 +69,17 @@ public class Task1Expert {
     }
 
     // test@yandex.ru -> tes*@******.ru
-    public static String maskingMail(String Mail) {
+    public static String maskingMail(String mail) {
         StringBuilder result = new StringBuilder();
 
-        int atIndex = Mail.indexOf("@");
-        int firstDotAfterAt = Mail.indexOf('.', atIndex);
+        int atIndex = mail.indexOf("@");
+        int firstDotAfterAt = mail.indexOf('.', atIndex);
 
-        result.append(Mail, 0, atIndex - 1);
+        result.append(mail, 0, atIndex - 1);
         result.append("*@");
 
         result.append("*".repeat(Math.max(0, firstDotAfterAt - atIndex - 1)));
-        result.append(Mail.substring(firstDotAfterAt));
+        result.append(mail.substring(firstDotAfterAt));
 
         return result.toString();
     }
