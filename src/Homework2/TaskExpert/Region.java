@@ -50,6 +50,7 @@ public class Region {
         int maxCarAmount = 0;
         int regionWithMaxCarAmount = 0;
 
+        //собираю мапу вида регион : количество въехавших машин из этого региона
         for (int i = 0; i < region.inputCarsArray.length; i++) {
             int regionInputCar = Integer.parseInt(inputCarsArray[i].substring(6));
             if (inputCarsByRegionCounter.containsKey(regionInputCar)) {
@@ -59,6 +60,7 @@ public class Region {
             }
         }
 
+        //ищу топ1 регион из которого, больше всего въехало машин
         for (int inputCarsByRegionCount : inputCarsByRegionCounter.keySet()) {
             if (inputCarsByRegionCounter.get(inputCarsByRegionCount) > maxCarAmount) {
                 maxCarAmount = inputCarsByRegionCounter.get(inputCarsByRegionCount);
