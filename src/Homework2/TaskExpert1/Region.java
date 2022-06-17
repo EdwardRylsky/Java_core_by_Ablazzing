@@ -119,6 +119,7 @@ public class Region {
         }
 
         System.out.println("Количество уникальных машин со спец. номерами — " + specNumberSet.size());
+        System.out.println(specNumberSet);
         //Task2Expert end
     }
 }
