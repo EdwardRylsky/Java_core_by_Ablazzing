@@ -77,10 +77,12 @@ public class Region {
         Map<Integer, Map<String, String[]>> statisticsRegions = GeneratorExpertHomework.getData();
         List<Region> regionList = new ArrayList<>();
 
+
         for (Integer regionNumber : statisticsRegions.keySet()) {
             regionList.add(new Region(regionNumber, statisticsRegions.get(regionNumber).get("input")));
         }
 
+        //сортируем список регионов по убыванию
         regionList.sort(new Comparator<>() {
             @Override
             public int compare(Region o1, Region o2) {
@@ -88,6 +90,7 @@ public class Region {
             }
         });
 
+        //формируем первую строку результата
         for (int i = 0; i < 5; i++) {
             result.append(regionList.get(i).regionNumber);
             if (i != 4) {
@@ -96,6 +99,7 @@ public class Region {
         }
         result.append("\n");
 
+        //формируем строки вида: "98 - больше всего въехало машин 23 с номерами 178"
         for (int i = 0; i < 5; i++) {
             result.append(regionList.get(i).regionNumber).append(" - ").append(findTopInputRegion(regionList.get(i))).append("\n");
         }
