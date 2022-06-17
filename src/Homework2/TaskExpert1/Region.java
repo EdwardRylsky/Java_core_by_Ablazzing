@@ -78,6 +78,7 @@ public class Region {
 
         Map<Integer, Map<String, String[]>> statisticsRegions = GeneratorExpertHomework.getData();
         List<Region> regionList = new ArrayList<>();
+        Set<String> specNumberSet = new HashSet<>();
 
 
         for (Integer regionNumber : statisticsRegions.keySet()) {
@@ -107,5 +108,17 @@ public class Region {
         }
 
         System.out.println(result);
+
+        //Task2Expert start
+        for (Region region : regionList) {
+            for (String carNumber : region.getInputCarsArray()) {
+                if (carNumber.matches("[М]\\d{3}[А][В]\\d*")) {
+                    specNumberSet.add(carNumber);
+                }
+            }
+        }
+
+        System.out.println("Количество уникальных машин со спец. номерами — " + specNumberSet.size());
+        //Task2Expert end
     }
 }
