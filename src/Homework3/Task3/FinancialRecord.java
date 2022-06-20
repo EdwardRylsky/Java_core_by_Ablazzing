@@ -52,8 +52,7 @@ public class FinancialRecord {
         writeReportsToFile(FILE_PATH, 10);
 
         //читаем созданные отчеты из файла в список
-        List<String> reportsList = new ArrayList<>();
-        readFile(FILE_PATH, reportsList);
+        List<String> reportsList = readFile(FILE_PATH);
 
         //считаем итоги
         calculateTotalAmount(reportsList);
@@ -66,12 +65,15 @@ public class FinancialRecord {
         }
     }
 
-    public static void readFile(String filePath, List<String> list) throws Exception{
+    public static List<String> readFile(String filePath) throws Exception{
+        List<String> result = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))){
             while (reader.ready()) {
-                list.add(reader.readLine());
+                result.add(reader.readLine());
             }
         }
+
+        return result;
     }
 
     public static void writeReportsToFile(String filePath, int numberReports) throws Exception {
