@@ -50,7 +50,7 @@ public class TasksExpert {
     }
 
     private static void calculateStoreProfitByAllReports(List<File> files, String store_name) throws Exception{
-        System.out.printf("Прибыль по магазину %s по месяцам", store_name);
+        System.out.printf("Прибыль по магазину %s по месяцам:", store_name);
         System.out.println();
         for (File file : files) {
             calculateStoreProfitByReport(file, store_name);
@@ -72,7 +72,7 @@ public class TasksExpert {
                 totalOutcomes += Double.parseDouble(resultsSplit[2]);
         }
 
-        System.out.printf("%s : %.2f", currentMonth, (totalIncomes-totalOutcomes));
+        System.out.printf("%s : %.2f", currentMonth, (totalIncomes - totalOutcomes));
         System.out.println();
     }
 
@@ -92,18 +92,15 @@ public class TasksExpert {
     }
 
     private static List<String> readStoreOperations(File file, String store_name) throws Exception {
-        List<String> result = readOperations(file);
+        List<String> resultsTemp = readOperations(file);
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
-            while (reader.ready()) {
-                String newLine = reader.readLine();
+        List<String> result = new ArrayList<>();
 
-                if (newLine.startsWith(store_name)) {
-                    result.add(newLine);
-                }
+        for (String resultTemp : resultsTemp) {
+            if (resultTemp.startsWith(store_name)) {
+                result.add(resultTemp);
             }
         }
-
         return result;
     }
 
