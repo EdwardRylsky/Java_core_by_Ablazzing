@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TasksExpert {
     public static void main(String[] args) throws Exception{
@@ -16,9 +18,35 @@ public class TasksExpert {
         //получаем список подходящих файлов
         List<File> needFileNamesList = readFilesFromDirByMask(DIRECTORY_PATH, FILE_MASK);
 
-        //рассчитываем прибыль по месяцам по магазину pyterochka
+        //Task 1 рассчитываем прибыль по месяцам по магазину pyterochka
         calculateStoreProfitByAllReports(needFileNamesList, STORE_NAME);
 
+        //Task 2 рассчитываем расходы каждого магазина за весь период
+        calculateAllStoreLostByReports(needFileNamesList);
+    }
+
+    private static void calculateAllStoreLostByReports(List<File> needFileNamesList) throws Exception{
+        Map<String, Double> storeLost = new HashMap<>();
+        for (File file : needFileNamesList) {
+
+            List<String> operationsList = readOperations(file);
+
+            for (String operation : operationsList) {
+                String[] resultsSplit = operation.split(";");
+
+                String storeName = resultsSplit[0];
+                double outcomes = Double.parseDouble(resultsSplit[2]);
+
+                if (storeLost.containsKey(storeName)) {
+                    storeLost.put(storeName, storeLost.get(storeName) + outcomes);
+                } else storeLost.put(storeName, outcomes);
+            }
+        }
+
+        for (String store : storeLost.keySet()) {
+            System.out.printf("Расходы %s за весь период: %.2f", store, storeLost.get(store));
+            System.out.println();
+        }
     }
 
     private static void calculateStoreProfitByAllReports(List<File> files, String store_name) throws Exception{
@@ -48,10 +76,24 @@ public class TasksExpert {
         System.out.println();
     }
 
+    private static List<String> readOperations(File file) throws Exception {
+        List<String> result = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            while (reader.ready()) {
+                String newLine = reader.readLine();
 
+                if (!newLine.startsWith("магазин;")) {
+                    result.add(newLine);
+                }
+            }
+        }
+
+        return result;
+    }
 
     private static List<String> readStoreOperations(File file, String store_name) throws Exception {
-        List<String> result = new ArrayList<>();
+        List<String> result = readOperations(file);
+
         try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             while (reader.ready()) {
                 String newLine = reader.readLine();
