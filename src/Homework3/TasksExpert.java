@@ -16,13 +16,13 @@ public class TasksExpert {
         final String STORE_NAME = "pyterochka";
 
         //получаем список подходящих файлов
-        List<File> needFileNamesList = readFilesFromDirByMask(DIRECTORY_PATH, FILE_MASK);
+        List<File> needFilesList = readFilesFromDirByMask(DIRECTORY_PATH, FILE_MASK);
 
         //Task 1 рассчитываем прибыль по месяцам по магазину pyterochka
-        calculateStoreProfitByAllReports(needFileNamesList, STORE_NAME);
+        calculateStoreProfitByAllReports(needFilesList, STORE_NAME);
 
         //Task 2 рассчитываем расходы каждого магазина за весь период
-        calculateAllStoreLostByReports(needFileNamesList);
+        calculateAllStoreLostByReports(needFilesList);
     }
 
     private static void calculateAllStoreLostByReports(List<File> needFileNamesList) throws Exception{
@@ -44,7 +44,7 @@ public class TasksExpert {
         }
 
         for (String store : storeLost.keySet()) {
-            System.out.printf("Расходы %s за весь период: %.2f", store, storeLost.get(store));
+            System.out.printf("Расходы %s за весь период: %.2f руб.", store, storeLost.get(store));
             System.out.println();
         }
     }
