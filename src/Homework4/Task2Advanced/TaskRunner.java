@@ -5,18 +5,20 @@ import java.util.ArrayList;
 public class TaskRunner {
     public static void main(String[] args) {
         //создаем бренд с двумя магазинами
-        Brand magnit = new Brand(2);
+        Brand magnit = new Brand(2, 1);
 
         //создаем поломанные часы
         Watch brokenWatch = new Watch(false);
 
-        //выдаем поломанные часы работнику 1го магазина
-        magnit.getStores()[0].worker.setWatch(brokenWatch);
+        //выдаем поломанные часы 1му работнику 1го магазина
+        magnit.getStores()[0].getWorker()[0].setWatch(brokenWatch);
 
         ArrayList<Watch> watches = new ArrayList<>();
 
         for (Store store : magnit.getStores()){
-            watches.add(store.worker.getWatch());
+            for (Worker worker : store.getWorker()){
+                watches.add(worker.getWatch());
+            }
         }
 
         for (Watch watch : watches) {
