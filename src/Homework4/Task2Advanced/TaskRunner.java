@@ -18,8 +18,8 @@ public class TaskRunner {
         //создаем поломанные часы
         Watch brokenWatch = new Watch(false);
 
-        //выдаем поломанные часы 1му работнику 1го магазина
-        workers2[0].setWatch(brokenWatch);
+        //выдаем поломанные часы одному работнику
+        workers1[0].setWatch(brokenWatch);
 
         ArrayList<Watch> watches = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class TaskRunner {
             }
         }
 
-        //проверям каждые часы
+        //проверяем каждые часы
         for (Watch watch : watches) {
             try {
                 watch.tick();
