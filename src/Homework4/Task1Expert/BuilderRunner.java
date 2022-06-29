@@ -11,14 +11,14 @@ package Homework4.Task1Expert;
 которые вызывают сеттеры у экземпляра класса Human.
 5. HumanBuilder имеет метод build, который возвращает готовый объект типа Human.
 Ожидаемый результат
-    Human human = Builder.builder().name("Петр").age(20).weight(80).build();
+    Human human = Human.builder().name("Петр").age(20).weight(80).build();
     human.info()
     Петр - возраст 20, вес 80
  */
 
 public class BuilderRunner {
     public static void main(String[] args) {
-        Human human = Builder.builder().name("Петр").age(20).weight(80).build();
+        Human human = Human.builder().name("Петр").age(20).weight(80).build();
         human.info();
     }
 }
