@@ -31,28 +31,28 @@ public class Human {
     }
 
     public static class HumanBuilder {
-        private final Human human = new Human();
+        private final Human newHuman = new Human();
 
         private HumanBuilder() {
         }
 
         HumanBuilder name(String name) {
-            human.setName(name);
+            newHuman.setName(name);
             return this;
         }
 
         HumanBuilder age(int age) {
-            human.setAge(age);
+            newHuman.setAge(age);
             return this;
         }
 
         HumanBuilder weight(int weight) {
-            human.setWeight(weight);
+            newHuman.setWeight(weight);
             return this;
         }
 
         public Human build() {
-            return human;
+            return newHuman;
         }
     }
 
