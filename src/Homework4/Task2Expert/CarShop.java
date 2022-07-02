@@ -11,7 +11,11 @@ public class CarShop {
 
     void sellCar() {
         printGreeting();
-        car.printPrice();
+        try {
+            car.printPrice();
+        } catch (Exception e) {
+            System.out.print("Неизвестна мне");
+        }
         printOffer();
     }
 

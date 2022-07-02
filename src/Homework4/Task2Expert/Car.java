@@ -7,11 +7,11 @@ public class Car {
         this.price = price;
     }
 
-    void printPrice() {
+    void printPrice() throws Exception {
         if (price > 0) {
             System.out.printf("%.2f", price);
         } else {
-            System.out.println("Неизвестна");
+            throw new Exception("Ошибка: стоимость меньше нуля");
         }
     }
 
