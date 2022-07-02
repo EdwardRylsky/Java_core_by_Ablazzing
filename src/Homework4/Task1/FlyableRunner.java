@@ -31,12 +31,7 @@ public class FlyableRunner {
             try {
                 flyable.fly();
             } catch (FlyException e) {
-                if (flyable instanceof Duck) {
-                    System.out.println("Ошибка: утка ранена");
-                }
-                if (flyable instanceof Plane) {
-                    System.out.println("Ошибка: пассажиров в самолете меньше 0");
-                }
+                System.out.println(e.getMessage());
             }
         }
     }

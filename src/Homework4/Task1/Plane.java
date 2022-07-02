@@ -10,7 +10,7 @@ public class Plane implements Flyable {
     @Override
     public void fly() throws FlyException {
         if (countPassengers < 0) {
-            throw new FlyException();
+            throw new FlyException("Ошибка: пассажиров в самолете меньше 0");
         }
 
         System.out.println("Самолет летит");
