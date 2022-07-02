@@ -10,7 +10,7 @@ public class Watch implements Tickable{
     @Override
     public void tick() throws WatchBrokenError {
         if (this.isBroken) {
-            throw new WatchBrokenError();
+            throw new WatchBrokenError("Ошибка: Часы сломались");
         } else {
             System.out.println("Часы тикают");
         }

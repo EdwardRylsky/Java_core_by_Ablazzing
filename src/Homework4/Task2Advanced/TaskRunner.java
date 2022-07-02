@@ -48,7 +48,7 @@ public class TaskRunner {
             try {
                 watch.tick();
             } catch (WatchBrokenError e) {
-                System.out.println("Ошибка: Часы сломались");
+                System.out.println(e.getMessage());
             }
         }
     }
