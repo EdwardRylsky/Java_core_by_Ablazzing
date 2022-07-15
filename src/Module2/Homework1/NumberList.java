@@ -7,8 +7,12 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
     private T[] array;
     private int size;
 
-    public NumberList(Class<T> clazz, int i) {
+    public NumberList(Class<T> clazz) {
         this.array = (T[]) Array.newInstance(clazz, 2);
+    }
+
+    public NumberList(Class<T> clazz, int i) {
+        this.array = (T[]) Array.newInstance(clazz, i);
     }
 
     @Override
@@ -39,7 +43,7 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        return Arrays.copyOf(array, size);
     }
 
     @Override
@@ -54,7 +58,7 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
         }
 
         if(array.length == size) {
-            grow();
+            array = Arrays.copyOf(array, array.length + (array.length >> 1));
         }
 
         size++;
@@ -63,10 +67,6 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
         }
         array[0] = t;
         return true;
-    }
-
-    private void grow() {
-        array = Arrays.copyOf(array, array.length + (array.length >> 1));
     }
 
     @Override
@@ -89,12 +89,25 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
 
     @Override
     public boolean containsAll(Collection<?> c) {
-        return false;
+        for (Object o : c) {
+            if (!contains(o)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public boolean addAll(Collection<? extends T> c) {
-        return false;
+        if (array.length - size < c.size()) {
+            array = Arrays.copyOf(array, array.length + c.size());
+        }
+
+        for (T o :c) {
+            add(o);
+        }
+
+        return true;
     }
 
     @Override
@@ -114,17 +127,23 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
 
     @Override
     public void clear() {
+        for (int i = 0; i < size; i++) {
+            array[i] = null;
+        }
 
     }
 
     @Override
     public T get(int index) {
+        checkIndex(index);
         return array[index];
     }
 
     @Override
     public T set(int index, T element) {
-        return null;
+        checkIndex(index);
+        array[index] = element;
+        return element;
     }
 
     @Override
@@ -134,7 +153,16 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
 
     @Override
     public T remove(int index) {
-        return null;
+        checkIndex(index);
+        T removed = array[index];
+        array[index] = null;
+        return removed;
+    }
+
+    private void checkIndex(int index) {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Вышли за предела размера");
+        }
     }
 
     @Override
@@ -175,13 +203,27 @@ public class NumberList<T extends Number> implements List<T>, RandomAccess {
 
     @Override
     public List<T> subList(int fromIndex, int toIndex) {
-        if (fromIndex > toIndex || fromIndex < 0 || toIndex > size) {
-            return null;
+        checkIndex(fromIndex);
+        checkIndex(toIndex);
+        if (fromIndex > toIndex) {
+            throw new IllegalArgumentException("Начальный индекс не должен быть больше конечного");
         }
-        return null;
+        List<T> newList = new ArrayList<>(toIndex - fromIndex);
+        for (int i = fromIndex; i < toIndex; i++) {
+            newList.add(array[i]);
+        }
+        return newList;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder strBuilder = new StringBuilder("");
 
+        for (int i = 0; i < size; i++) {
+            strBuilder.append(array[i].toString()).append(" ");
+        }
+       return strBuilder.toString();
+    }
 
     public Double getDouble(int index) {
         Double result = null;
