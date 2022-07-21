@@ -11,6 +11,11 @@ public class User {
         this.indexNumber = indexNumber;
     }
 
+    public User(int indexNumber, List<Integer> integerList) {
+        this.indexNumber = indexNumber;
+        this.integerList = integerList;
+    }
+
     public int getIndexNumber() {
         return indexNumber;
     }
