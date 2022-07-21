@@ -5,7 +5,7 @@ List<List<Integer>> lists = List.of(List.of(1, 2), List.of(3, 4, 5), List.of());
 Ожидаемый результат: 3,4,5,1,2
  */
 
-package Module2.Homework2.Task1;
+package Module2.Homework2;
 
 import java.util.Collection;
 import java.util.List;
