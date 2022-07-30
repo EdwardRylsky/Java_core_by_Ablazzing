@@ -8,7 +8,8 @@ public class UserMeta {
     private String name;
 
     @GetMetaData
-    public String GetSuperName(String prefix) {
+    public String GetSuperName(String prefix) throws InterruptedException {
+        Thread.sleep(1000);
         return prefix;
     }
 }

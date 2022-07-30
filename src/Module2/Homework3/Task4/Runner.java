@@ -43,7 +43,7 @@ public class Runner {
                     long start = System.currentTimeMillis();
                     declaredMethod.invoke(userMeta, "Prefix");
                     long end = System.currentTimeMillis();
-                    System.out.println("Время выполнения метода '" + declaredMethod + "' составило: " + (start - end) + " миллисекунд");
+                    System.out.println("Время выполнения метода '" + declaredMethod + "' составило: " + (end - start) + " миллисекунд");
                 }
             }
         }
